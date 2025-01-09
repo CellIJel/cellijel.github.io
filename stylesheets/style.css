@@ -27,6 +27,24 @@
     font-size: 15px
 }
 
+.footer-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-link a {
+    margin: 0 10px; /* Adjust the spacing between images */
+    text-decoration: none; /* Remove any text decoration */
+}
+
+.footer-link img {
+    border: none; /* Remove any borders */
+    margin: 0; /* Remove any margins */
+    padding: 0; /* Remove any padding */
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
 a:link {
     color:#82a6ea;
 }
