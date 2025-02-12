@@ -84,7 +84,7 @@ function updateHTML(commits) {
 
   const updatedHTML = html.replace(
     /<!-- START RECENT COMMITS -->[\s\S]*<!-- END RECENT COMMITS -->/,
-    `<!-- START RECENT COMMITS --><ul class="commit-list">${commitsHTML}</ul><a id="load-more" class="load-more" href="javascript:void(0);">Load More</a><!-- END RECENT COMMITS -->`
+    `<!-- START RECENT COMMITS --><div id="commits-container"><ul class="commit-list">${commitsHTML}</ul><a id="load-more" class="load-more" href="javascript:void(0);">Load More</a></div><!-- END RECENT COMMITS -->`
   );
 
   fs.writeFileSync(filePath, updatedHTML);
