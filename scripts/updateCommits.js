@@ -29,19 +29,23 @@ async function getRecentCommits(page = 1) {
 }
 
 function renderCommits(commits) {
-  const commitList = document.getElementById('commit-list');
-  const commitsHTML = commits.map(commit => `
-    <li>
-      <div class="commit-message"><a href="${commit.url}">${commit.message}</a></div>
-      <div class="commit-date">${new Date(commit.date).toLocaleString()}</div>
-    </li>
-  `).join('');
-  commitList.insertAdjacentHTML('beforeend', commitsHTML);
+  if (typeof document !== 'undefined') {
+    const commitList = document.getElementById('commit-list');
+    const commitsHTML = commits.map(commit => `
+      <li>
+        <div class="commit-message"><a href="${commit.url}">${commit.message}</a></div>
+        <div class="commit-date">${new Date(commit.date).toLocaleString()}</div>
+      </li>
+    `).join('');
+    commitList.insertAdjacentHTML('beforeend', commitsHTML);
+  }
 }
 
 async function loadMoreCommits() {
   if ((currentPage - 1) * commitsPerPage + commitsPerPage >= maxCommits) {
-    document.getElementById('load-more').style.display = 'none';
+    if (typeof document !== 'undefined') {
+      document.getElementById('load-more').style.display = 'none';
+    }
   }
 
   const commits = await getRecentCommits(currentPage);
@@ -49,10 +53,37 @@ async function loadMoreCommits() {
   currentPage++;
 }
 
-document.getElementById('load-more').addEventListener('click', loadMoreCommits);
+if (typeof document !== 'undefined') {
+  document.getElementById('load-more').addEventListener('click', loadMoreCommits);
+}
 
 async function main() {
-  await loadMoreCommits();
+  const commits = await getRecentCommits();
+  if (typeof document !== 'undefined') {
+    renderCommits(commits);
+  } else {
+    // For Node.js environment, update the HTML file directly
+    updateHTML(commits);
+  }
+}
+
+function updateHTML(commits) {
+  const filePath = path.join(__dirname, '../index.html');
+  let html = fs.readFileSync(filePath, 'utf8');
+
+  const commitsHTML = commits.map(commit => `
+    <li>
+      <div class="commit-message"><a href="${commit.url}">${commit.message}</a></div>
+      <div class="commit-date">${new Date(commit.date).toLocaleString()}</div>
+    </li>
+  `).join('');
+
+  const updatedHTML = html.replace(
+    /<!-- START RECENT COMMITS -->[\s\S]*<!-- END RECENT COMMITS -->/,
+    `<!-- START RECENT COMMITS --><ul class="commit-list">${commitsHTML}</ul><!-- END RECENT COMMITS -->`
+  );
+
+  fs.writeFileSync(filePath, updatedHTML);
 }
 
 main().catch(err => {
