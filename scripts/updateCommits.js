@@ -9,11 +9,16 @@ const octokit = new Octokit({
   auth: process.env.COMMITS_TOKEN,
 });
 
-async function getRecentCommits() {
+let currentPage = 1;
+const commitsPerPage = 5;
+const maxCommits = 15;
+
+async function getRecentCommits(page = 1) {
   const { data: commits } = await octokit.repos.listCommits({
     owner: repoOwner,
     repo: repoName,
-    per_page: 5,
+    per_page: commitsPerPage,
+    page: page,
   });
 
   return commits.map(commit => ({
@@ -23,28 +28,31 @@ async function getRecentCommits() {
   }));
 }
 
-async function updateHTML(commits) {
-  const filePath = path.join(__dirname, '../index.html');
-  let html = fs.readFileSync(filePath, 'utf8');
-
+function renderCommits(commits) {
+  const commitList = document.getElementById('commit-list');
   const commitsHTML = commits.map(commit => `
     <li>
       <div class="commit-message"><a href="${commit.url}">${commit.message}</a></div>
       <div class="commit-date">${new Date(commit.date).toLocaleString()}</div>
     </li>
   `).join('');
-
-  const updatedHTML = html.replace(
-    /<!-- START RECENT COMMITS -->[\s\S]*<!-- END RECENT COMMITS -->/,
-    `<!-- START RECENT COMMITS --><ul class="commit-list">${commitsHTML}</ul><!-- END RECENT COMMITS -->`
-  );
-
-  fs.writeFileSync(filePath, updatedHTML);
+  commitList.insertAdjacentHTML('beforeend', commitsHTML);
 }
 
+async function loadMoreCommits() {
+  if ((currentPage - 1) * commitsPerPage + commitsPerPage >= maxCommits) {
+    document.getElementById('load-more').style.display = 'none';
+  }
+
+  const commits = await getRecentCommits(currentPage);
+  renderCommits(commits);
+  currentPage++;
+}
+
+document.getElementById('load-more').addEventListener('click', loadMoreCommits);
+
 async function main() {
-  const commits = await getRecentCommits();
-  await updateHTML(commits);
+  await loadMoreCommits();
 }
 
 main().catch(err => {
