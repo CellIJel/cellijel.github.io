@@ -12,6 +12,8 @@ const octokit = new Octokit({
 let currentPage = 1;
 const commitsPerPage = 5;
 const maxCommits = 15;
+let loadMorePressCount = 0;
+const maxLoadMorePresses = 2;
 
 async function getRecentCommits(page = 1) {
   const { data: commits } = await octokit.repos.listCommits({
@@ -45,8 +47,9 @@ async function loadMoreCommits() {
   const commits = await getRecentCommits(currentPage);
   renderCommits(commits);
   currentPage++;
+  loadMorePressCount++;
 
-  if ((currentPage - 1) * commitsPerPage >= maxCommits) {
+  if (loadMorePressCount >= maxLoadMorePresses) {
     if (typeof document !== 'undefined') {
       document.getElementById('load-more').style.display = 'none';
     }
@@ -61,10 +64,7 @@ async function main() {
   const commits = await getRecentCommits();
   if (typeof document !== 'undefined') {
     renderCommits(commits);
-
-    if (commits.length > 0) {
-      document.getElementById('load-more').style.display = 'block';
-    }
+    document.getElementById('load-more').style.display = 'block'; // Always show the button
   } else {
     // For Node.js environment, update the HTML file directly
     updateHTML(commits);
