@@ -27,11 +27,16 @@ async function updateHTML(commits) {
   const filePath = path.join(__dirname, '../index.html');
   let html = fs.readFileSync(filePath, 'utf8');
 
-  const commitsHTML = commits.map(commit => `<li><a href="${commit.url}">${commit.message}</a> - ${new Date(commit.date).toLocaleString()}</li>`).join('');
+  const commitsHTML = commits.map(commit => `
+    <li>
+      <div class="commit-message"><a href="${commit.url}">${commit.message}</a></div>
+      <div class="commit-date">${new Date(commit.date).toLocaleString()}</div>
+    </li>
+  `).join('');
 
   const updatedHTML = html.replace(
     /<!-- START RECENT COMMITS -->[\s\S]*<!-- END RECENT COMMITS -->/,
-    `<!-- START RECENT COMMITS --><ul>${commitsHTML}</ul><!-- END RECENT COMMITS -->`
+    `<!-- START RECENT COMMITS --><ul class="commit-list">${commitsHTML}</ul><!-- END RECENT COMMITS -->`
   );
 
   fs.writeFileSync(filePath, updatedHTML);
