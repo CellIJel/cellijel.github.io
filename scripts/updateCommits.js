@@ -6,7 +6,7 @@ const repoOwner = 'CellIJel';
 const repoName = 'cellijel.github.io';
 
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
+  auth: process.env.COMMITS_TOKEN,
 });
 
 async function getRecentCommits() {
