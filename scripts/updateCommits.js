@@ -59,6 +59,7 @@ async function loadMoreCommits() {
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('load-more').addEventListener('click', loadMoreCommits);
+    main(); // Ensure initial commits are loaded on page load
   });
 }
 
