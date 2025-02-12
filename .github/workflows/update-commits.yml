@@ -32,4 +32,4 @@ jobs:
           git commit -m 'Update recent commits'
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMITS_TOKEN: ${{ secrets.COMMITS_TOKEN }}
