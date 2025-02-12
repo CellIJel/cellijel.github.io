@@ -45,6 +45,33 @@
     height: auto; /* Maintain aspect ratio */
 }
 
+.commit-list {
+    list-style-type: none;
+    padding: 0;
+}
+.commit-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.commit-list li a {
+    text-decoration: none;
+    color: #0366d6;
+    font-weight: bold;
+}
+.commit-list li a:hover {
+    text-decoration: underline;
+}
+.commit-message {
+    margin-bottom: 5px;
+}
+.commit-date {
+    font-size: 0.9em;
+    color: #666;
+}
+
 a:link {
     color:#82a6ea;
 }
