@@ -76,7 +76,7 @@
   color: #aaaaaa;
 }
 .load-more {
-  display: block;
+  display: none; /* Initially hide the button */
   width: 100%;
   padding: 10px;
   margin-top: 10px;

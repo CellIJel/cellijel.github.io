@@ -42,15 +42,15 @@ function renderCommits(commits) {
 }
 
 async function loadMoreCommits() {
-  if ((currentPage - 1) * commitsPerPage + commitsPerPage >= maxCommits) {
+  const commits = await getRecentCommits(currentPage);
+  renderCommits(commits);
+  currentPage++;
+
+  if ((currentPage - 1) * commitsPerPage >= maxCommits) {
     if (typeof document !== 'undefined') {
       document.getElementById('load-more').style.display = 'none';
     }
   }
-
-  const commits = await getRecentCommits(currentPage);
-  renderCommits(commits);
-  currentPage++;
 }
 
 if (typeof document !== 'undefined') {
@@ -61,6 +61,10 @@ async function main() {
   const commits = await getRecentCommits();
   if (typeof document !== 'undefined') {
     renderCommits(commits);
+
+    if (commits.length > 0) {
+      document.getElementById('load-more').style.display = 'block';
+    }
   } else {
     // For Node.js environment, update the HTML file directly
     updateHTML(commits);
@@ -80,7 +84,7 @@ function updateHTML(commits) {
 
   const updatedHTML = html.replace(
     /<!-- START RECENT COMMITS -->[\s\S]*<!-- END RECENT COMMITS -->/,
-    `<!-- START RECENT COMMITS --><ul class="commit-list">${commitsHTML}</ul><!-- END RECENT COMMITS -->`
+    `<!-- START RECENT COMMITS --><ul class="commit-list">${commitsHTML}</ul><a id="load-more" class="load-more" href="javascript:void(0);">Load More</a><!-- END RECENT COMMITS -->`
   );
 
   fs.writeFileSync(filePath, updatedHTML);
