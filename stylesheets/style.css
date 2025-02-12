@@ -46,30 +46,51 @@
 }
 
 .commit-list {
-    list-style-type: none;
-    padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  list-style-type: none;
 }
 .commit-list li {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+  flex: 1 1 calc(20% - 10px);
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #1e1e1e;
 }
 .commit-list li a {
-    text-decoration: none;
-    color: #0366d6;
-    font-weight: bold;
+  text-decoration: none;
+  color: #1e90ff;
+  font-weight: bold;
 }
 .commit-list li a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 .commit-message {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .commit-date {
-    font-size: 0.9em;
-    color: #666;
+  font-size: 0.9em;
+  color: #aaaaaa;
+}
+.load-more {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: #1e90ff;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+.load-more:hover {
+  background-color: #333;
 }
 
 a:link {
