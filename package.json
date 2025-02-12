@@ -1,0 +1,10 @@
+{
+  "name": "cellijel-github-io",
+  "version": "1.0.0",
+  "scripts": {
+    "update-commits": "node scripts/updateCommits.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.0.12"
+  }
+}
