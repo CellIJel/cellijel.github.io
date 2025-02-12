@@ -57,7 +57,9 @@ async function loadMoreCommits() {
 }
 
 if (typeof document !== 'undefined') {
-  document.getElementById('load-more').addEventListener('click', loadMoreCommits);
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('load-more').addEventListener('click', loadMoreCommits);
+  });
 }
 
 async function main() {
@@ -84,7 +86,7 @@ function updateHTML(commits) {
 
   const updatedHTML = html.replace(
     /<!-- START RECENT COMMITS -->[\s\S]*<!-- END RECENT COMMITS -->/,
-    `<!-- START RECENT COMMITS --><div id="commits-container"><ul class="commit-list">${commitsHTML}</ul><a id="load-more" class="load-more" href="javascript:void(0);">Load More</a></div><!-- END RECENT COMMITS -->`
+    `<!-- START RECENT COMMITS --><div id="commits-container"><ul class="commit-list">${commitsHTML}</ul><button id="load-more" class="load-more">Load More</button></div><!-- END RECENT COMMITS -->`
   );
 
   fs.writeFileSync(filePath, updatedHTML);
