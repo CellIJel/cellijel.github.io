@@ -83,21 +83,7 @@
   color: #aaaaaa;
 }
 .load-more {
-  display: block; /* Always show the button */
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  text-align: center;
-  border: 1px solid #333;
-  border-radius: 5px;
-  background-color: #1e1e1e;
-  color: #1e90ff;
-  cursor: pointer;
-  text-decoration: none;
-  font-weight: bold;
-}
-.load-more:hover {
-  background-color: #333;
+  display: none; /* Hide the button */
 }
 
 a:link {

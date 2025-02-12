@@ -10,10 +10,7 @@ const octokit = new Octokit({
 });
 
 let currentPage = 1;
-const commitsPerPage = 5;
-const maxCommits = 15;
-let loadMorePressCount = 0;
-const maxLoadMorePresses = 2;
+const commitsPerPage = 15; // Load all commits at once
 
 async function getRecentCommits(page = 1) {
   const { data: commits } = await octokit.repos.listCommits({
@@ -47,18 +44,11 @@ async function loadMoreCommits() {
   const commits = await getRecentCommits(currentPage);
   renderCommits(commits);
   currentPage++;
-  loadMorePressCount++;
-
-  if (loadMorePressCount >= maxLoadMorePresses) {
-    if (typeof document !== 'undefined') {
-      document.getElementById('load-more').style.display = 'none';
-    }
-  }
+  // Remove loadMorePressCount and maxLoadMorePresses logic
 }
 
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('load-more').addEventListener('click', loadMoreCommits);
     main(); // Ensure initial commits are loaded on page load
   });
 }
@@ -67,7 +57,7 @@ async function main() {
   const commits = await getRecentCommits();
   if (typeof document !== 'undefined') {
     renderCommits(commits);
-    document.getElementById('load-more').style.display = 'block'; // Always show the button
+    // Remove the line that shows the "Load More" button
   } else {
     // For Node.js environment, update the HTML file directly
     updateHTML(commits);
@@ -87,7 +77,7 @@ function updateHTML(commits) {
 
   const updatedHTML = html.replace(
     /<!-- START RECENT COMMITS -->[\s\S]*<!-- END RECENT COMMITS -->/,
-    `<!-- START RECENT COMMITS --><div id="commits-container"><ul class="commit-list">${commitsHTML}</ul><button id="load-more" class="load-more">Load More</button></div><!-- END RECENT COMMITS -->`
+    `<!-- START RECENT COMMITS --><div id="commits-container"><ul class="commit-list">${commitsHTML}</ul></div><!-- END RECENT COMMITS -->`
   );
 
   fs.writeFileSync(filePath, updatedHTML);
