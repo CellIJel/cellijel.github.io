@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (cookieValue) {
         // Create the link element
         const link = document.createElement("a");
-        link.href = "https://github.com/CellIJel/GPTMade";
+        link.href = "https://github.com/CellIJel/cellijel.github.io";
         link.textContent = "Visit the Repository";
         link.style.position = "fixed";
         link.style.top = "0";
