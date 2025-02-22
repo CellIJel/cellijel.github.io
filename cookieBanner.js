@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Create the link element
         const link = document.createElement("a");
         link.href = "https://github.com/CellIJel/cellijel.github.io";
-        link.textContent = "Visit the Repository";
+        link.textContent = "Visit this Repository";
         link.className = "special-access-link"; // Add a class to the link
         link.style.position = "fixed";
         link.style.top = "0";
