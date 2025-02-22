@@ -96,3 +96,12 @@ body {
     background-color: #1b1b1b;
     font-family: Arial, sans-serif;
 }
+
+.special-access-link {
+    color: #1e90ff; /* Ensure the link color is as desired */
+    text-decoration: none; /* Remove underline */
+}
+
+.special-access-link:visited {
+    color: #1e90ff; /* Ensure visited link color is the same */
+}
