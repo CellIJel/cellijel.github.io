@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const banner = document.getElementById('cookie-banner');
         if (banner) {
             banner.style.display = 'block';
+        } else {
+            console.error('Element with ID "cookie-banner" not found.');
         }
     }
 });
