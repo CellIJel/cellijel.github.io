@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function() {
         link.style.textAlign = "center";
         link.style.padding = "10px";
         link.style.zIndex = "1000";
+        link.style.fontWeight = "bold";
+        link.style.color = "#1e90ff";
 
         // Append the link to the body
         document.body.appendChild(link);
