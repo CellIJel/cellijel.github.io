@@ -97,15 +97,23 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.special-access-link {
-    color: #1e90ff; /* Ensure the link color is as desired */
-    text-decoration: underline; /* Add an underline to the link */
+#cookie-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: yellow;
+    color: #1e90ff;
+    text-align: center;
+    padding: 10px;
+    z-index: 1000;
+    font-weight: bold;
 }
 
-.special-access-link:visited {
-    color: #1e90ff; /* Ensure visited link color is the same */
+#cookie-banner a:link {
+    color: #1e90ff; /* Use the specified color */
 }
 
-.cookie-banner a {
-    text-decoration: underline;
+#cookie-banner a:visited {
+    color: #1e90ff; /* Use the specified color */
 }
