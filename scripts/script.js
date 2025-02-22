@@ -17,3 +17,5 @@ if (getCookie('showBanner') === 'true') {
 
 // Instructions to set the cookie via the browser's developer tools console:
 // document.cookie = "showBanner=true; path=/";
+// Remove the cookie by pasting
+// document.cookie = "showBanner=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
