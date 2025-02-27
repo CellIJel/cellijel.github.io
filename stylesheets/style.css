@@ -45,47 +45,6 @@
     height: auto; /* Maintain aspect ratio */
 }
 
-#commits-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.commit-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 0;
-  list-style-type: none;
-  width: 100%;
-  justify-content: center;
-}
-.commit-list li {
-  flex: 1 1 calc(20% - 10px);
-  box-sizing: border-box;
-  padding: 10px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  background-color: #1e1e1e;
-}
-.commit-list li a {
-  text-decoration: none;
-  color: #1e90ff;
-  font-weight: bold;
-}
-.commit-list li a:hover {
-  text-decoration: underline;
-}
-.commit-message {
-  margin-bottom: 5px;
-}
-.commit-date {
-  font-size: 0.9em;
-  color: #aaaaaa;
-}
-.load-more {
-  display: none; /* Hide the button */
-}
-
 a:link {
     color:#1e90ff;
 }
